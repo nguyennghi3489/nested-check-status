@@ -1,9 +1,9 @@
-import React, { memo, useMemo, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faMinus } from "@fortawesome/free-solid-svg-icons";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { memo, useState } from "react";
 import { MenuModel, Status } from "../models/Menu";
 import styles from "./menu.module.css";
+
 export const SubMenu = () => {};
 
 interface MenuProps {
