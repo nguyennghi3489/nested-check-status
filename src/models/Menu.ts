@@ -50,13 +50,13 @@ export class MenuModel {
 
   toggleUp() {
     if (!this.parent) return;
-    const uncheckedItem = this.countUnchecked(this.parent);
-    if (uncheckedItem === 0) {
+    const [uncheckedItem, checkedItem] = this.countUnchecked(this.parent);
+    if (checkedItem === this.parent.items.length) {
       this.parent.status = Status.checked;
-    } else if (uncheckedItem < this.parent.items.length) {
-      this.parent.status = Status.partial_checked;
-    } else {
+    } else if (uncheckedItem === this.parent.items.length) {
       this.parent.status = Status.unchecked;
+    } else {
+      this.parent.status = Status.partial_checked;
     }
 
     if (this.parent.parent) {
@@ -64,11 +64,14 @@ export class MenuModel {
     }
   }
 
-  countUnchecked(item: MenuModel): number {
-    const unCheckItem = item.items.filter(
+  countUnchecked(item: MenuModel): [number, number] {
+    const unCheckedItem = item.items.filter(
       (item) => item.status === Status.unchecked
     );
-    return unCheckItem.length;
+    const checkedItem = item.items.filter(
+      (item) => item.status === Status.checked
+    );
+    return [unCheckedItem.length, checkedItem.length];
   }
 
   findRoot(): MenuModel {
