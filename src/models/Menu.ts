@@ -33,6 +33,7 @@ export class MenuModel {
     this.status = status || newStatus;
     this.toggleDown(newStatus);
     this.toggleUp();
+
     return this.findRoot();
   }
 
@@ -49,7 +50,7 @@ export class MenuModel {
 
   toggleUp() {
     if (!this.parent) return;
-    const uncheckedItem = this.countUnChecked(this.parent);
+    const uncheckedItem = this.countUnchecked(this.parent);
     if (uncheckedItem === 0) {
       this.parent.status = Status.checked;
     } else if (uncheckedItem < this.parent.items.length) {
@@ -57,12 +58,13 @@ export class MenuModel {
     } else {
       this.parent.status = Status.unchecked;
     }
+
     if (this.parent.parent) {
       this.parent.toggleUp();
     }
   }
 
-  countUnChecked(item: MenuModel): number {
+  countUnchecked(item: MenuModel): number {
     const unCheckItem = item.items.filter(
       (item) => item.status === Status.unchecked
     );

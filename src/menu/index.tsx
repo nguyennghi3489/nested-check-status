@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 import { MenuModel, Status } from "../models/Menu";
-import { rerenderItems } from "../utils";
 import styles from "./menu.module.css";
 export const SubMenu = () => {};
 
@@ -61,10 +60,7 @@ const Menu = ({ items, update }: MenuProps) => {
 export const MenuContainer = ({ rootMenu }: any) => {
   const [data, setData] = useState(rootMenu);
   const [refresh, setRefresh] = useState(false);
-  //   console.log(data);
-  console.log(data.items);
   const update = (value: any) => {
-    // console.log(value);
     setData(value);
     setRefresh(!refresh);
   };
@@ -72,9 +68,6 @@ export const MenuContainer = ({ rootMenu }: any) => {
   return (
     <div className={styles.menuContainer}>
       <Menu items={data.items} update={update} />
-      {/* <Menu items={items} />
-      <Menu items={items} />
-      <Menu items={items} /> */}
     </div>
   );
 };
